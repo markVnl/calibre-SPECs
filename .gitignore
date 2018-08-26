@@ -2,3 +2,4 @@ repo_update
 *.log
 *.rpm
 *.gz
+*.tgz
