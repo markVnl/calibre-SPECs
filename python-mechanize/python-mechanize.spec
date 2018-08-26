@@ -14,8 +14,8 @@ Source0:        https://github.com/python-mechanize/mechanize/archive/v%{version
 BuildArch:      noarch
 BuildRequires:  python2-devel
 # for tests
-BuildRequires:  python-zope-interface python-twisted-web2
-BuildRequires:  python-setuptools python2-html5lib
+#BuildRequires:  python-zope-interface python-twisted-web2
+#BuildRequires:  python-setuptools python2-html5lib
 
 %description
 Stateful programmatic web browsing, after Andy Lester's Perl module
@@ -65,7 +65,7 @@ chmod -x examples/forms/{echo.cgi,example.py,simple.py}
 %install
 %py2_install
 
-%check
+#%%check
 #chmod +x examples/forms/{echo.cgi,example.py,simple.py}
 #{__python} run_tests.py --log-server
 #chmod -x examples/forms/{echo.cgi,example.py,simple.py}
