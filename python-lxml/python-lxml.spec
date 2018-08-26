@@ -31,30 +31,14 @@ BuildRequires:  python2-setuptools
 %if %{with cython}
 BuildRequires:  python2-Cython
 %endif
-Recommends:     python2-cssselect
-Recommends:     python2-html5lib
-Recommends:     python2-beautifulsoup4
-%{?python_provide:%python_provide python2-%{modname}}
+#Recommends:     python2-cssselect
+#Recommends:     python2-html5lib
+#Recommends:     python2-beautifulsoup4
+Provides:        python2-%{modname} = %{version}
 
 %description -n python2-%{modname} %{_description}
 
 Python 2 version.
-
-%package -n     python3-%{modname}
-Summary:        %{summary}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-%if %{with cython}
-BuildRequires:  python3-Cython
-%endif
-Recommends:     python3-cssselect
-Recommends:     python3-html5lib
-Recommends:     python3-beautifulsoup4
-%{?python_provide:%python_provide python3-%{modname}}
-
-%description -n python3-%{modname} %{_description}
-
-Python 3 version.
 
 %prep
 %autosetup -n %{modname}-%{version}
@@ -64,27 +48,19 @@ Python 3 version.
 export WITH_CYTHON=true
 %endif
 %py2_build
-%py3_build
 
 %install
 %py2_install
-%py3_install
 
 %check
 %{__python2} setup.py test
-%{__python3} setup.py test
 
 %files -n python2-%{modname}
 %license doc/licenses/ZopePublicLicense.txt LICENSES.txt
 %doc README.rst src/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/readme.txt
-%{python2_sitearch}/%{modname}/
-%{python2_sitearch}/%{modname}-*.egg-info/
+%python_sitearch//%{modname}/
+%python_sitearch/%{modname}-%{version}-py%{python_version}.egg-info/*
 
-%files -n python3-%{modname}
-%license doc/licenses/ZopePublicLicense.txt LICENSES.txt
-%doc README.rst src/lxml/isoschematron/resources/xsl/iso-schematron-xslt1/readme.txt
-%{python3_sitearch}/%{modname}/
-%{python3_sitearch}/%{modname}-*.egg-info/
 
 %changelog
 * Sun Nov 05 2017 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 4.1.1-1
