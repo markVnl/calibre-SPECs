@@ -16,10 +16,10 @@ BuildRequires:  libxml2-devel
 BuildRequires:  pkgconfig
 BuildRequires:  python-setuptools
 # For tests
-BuildRequires:  python2-lxml >= 3.8.0
-BuildRequires:  gtest-devel
-BuildRequires:  python-chardet
-BuildRequires:  python-beautifulsoup4
+#BuildRequires:  python2-lxml >= 3.8.0
+#BuildRequires:  gtest-devel
+#BuildRequires:  python-chardet
+#BuildRequires:  python-beautifulsoup4
 
 %description
 A fast, standards compliant, C based, HTML 5 parser for python
@@ -53,8 +53,8 @@ sed -i -e '/^#!\//, 1d' src/html5_parser/*.py
 %install
 %py2_install
 
-%check
-%{__python2} setup.py test
+#%check
+#%{__python2} setup.py test
 
 %files -n python2-%{srcname}
 %license LICENSE
