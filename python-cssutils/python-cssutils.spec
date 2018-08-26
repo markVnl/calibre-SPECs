@@ -48,19 +48,6 @@ BuildRequires:  python2-mock
 
 Python 2 version.
 
-%package -n python3-%{srcname}
-Summary:        %{summary}
-%{?python_provide:%python_provide python3-%{srcname}}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-%if %{with tests}
-BuildRequires:  python3-mock
-%endif
-
-%description -n python3-%{srcname} %{_description}
-
-Python 3 version.
-
 %prep
 %setup -c
 pushd %{srcname}-%{version}
@@ -82,28 +69,18 @@ cp -a python2 python3
 pushd python2
   %py2_build
 popd
-pushd python3
-  %py3_build
-popd
+
 
 %install
 pushd python2
   %py2_install
 popd
-pushd python3
-  %py3_install
-popd
 rm -vrf %{buildroot}%{python2_sitelib}/%{srcname}/tests/
-rm -vrf %{buildroot}%{python3_sitelib}/%{srcname}/tests/
 
 %if %{with tests}
 %check
 pushd python2
   %{__python2} setup.py test -v
-popd
-pushd python3
-  # https://bitbucket.org/cthedot/cssutils/issues/68/some-of-tests-are-failing-on-python-3
-  %{__python3} setup.py test -v || :
 popd
 %endif
 
@@ -113,13 +90,6 @@ popd
 %{python2_sitelib}/%{srcname}-*.egg-info/
 %{python2_sitelib}/%{srcname}/
 %{python2_sitelib}/encutils/
-
-%files -n python3-%{srcname}
-%license COPYING
-%doc README.txt
-%{python3_sitelib}/%{srcname}-*.egg-info/
-%{python3_sitelib}/%{srcname}/
-%{python3_sitelib}/encutils/
 %{_bindir}/csscapture
 %{_bindir}/csscombine
 %{_bindir}/cssparse
