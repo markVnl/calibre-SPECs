@@ -3,3 +3,4 @@ repo_update
 *.rpm
 *.gz
 *.tgz
+*.bz2
