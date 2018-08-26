@@ -16,8 +16,8 @@
 
 Summary: SIP - Python/C++ Bindings Generator
 Name: sip
-Version: 4.19.3
-Release: 4%{?dist}
+Version: 4.19.5
+Release: 1%{?dist}
 
 # sipgen/parser.{c.h} is GPLv3+ with exceptions (bison)
 License: GPLv2 or GPLv3 and (GPLv3+ with exceptions)
@@ -39,7 +39,7 @@ Patch52: sip-4.19.3-python3_sip_bin.patch
 # extracted from sip.h, SIP_API_MAJOR_NR SIP_API_MINOR_NR defines
 Source1: macros.sip
 %global _sip_api_major 12
-%global _sip_api_minor 2
+%global _sip_api_minor 3
 %global _sip_api %{_sip_api_major}.%{_sip_api_minor}
 
 Provides: sip-api(%{_sip_api_major}) = %{_sip_api}
@@ -196,6 +196,12 @@ install -D -p -m644 %{SOURCE1} %{buildroot}%{rpm_macros_dir}/macros.sip
 
 
 %changelog
+* Mon Nov 06 2017 Rex Dieter <rdieter@fedoraproject.org> - 4.19.5-1
+- sip-4.19.5
+
+* Sat Nov 04 2017 Rex Dieter <rdieter@fedoraproject.org> - 4.19.4-1
+- sip-4.19.4, sip-api(12)=12.3
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.19.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
