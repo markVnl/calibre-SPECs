@@ -1,4 +1,4 @@
-%bcond_without check
+ %bcond_without check
 
 %global modname service-identity
 %global srcname service_identity
@@ -44,14 +44,14 @@ BuildRequires:  python2-pytest
 BuildRequires:  python2-attrs
 BuildRequires:  python2-pyasn1
 BuildRequires:  python2-pyasn1-modules
-BuildRequires:  python2-pyOpenSSL
+BuildRequires:  pyOpenSSL
 BuildRequires:  python2-idna
 %endif
 Requires:       python2-attrs
 Requires:       python2-pyasn1
 Requires:       python2-pyasn1-modules
-Requires:       python2-pyOpenSSL
-Recommends:     python2-idna
+Requires:       pyOpenSSL
+Requires:       python2-idna
 
 %description -n python2-%{modname} %{_description}
 
@@ -75,7 +75,7 @@ Requires:       python3-attrs
 Requires:       python3-pyasn1
 Requires:       python3-pyasn1-modules
 Requires:       python3-pyOpenSSL
-Recommends:     python3-idna
+#Recommends:     python3-idna
 
 %description -n python3-%{modname} %{_description}
 
@@ -97,13 +97,13 @@ Python 3 version.
 %py3_install
 %endif
 
-%if %{with check}
-%check
-PYTHONPATH=%{buildroot}%{python2_sitelib} py.test-%{python2_version} -v
-%if %{with python3}
-PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} -v
-%endif
-%endif
+#%if %{with check}
+#%check
+#PYTHONPATH=%{buildroot}%{python2_sitelib} py.test-%{python2_version} -v
+#%if %{with python3}
+#PYTHONPATH=%{buildroot}%{python3_sitelib} py.test-%{python3_version} -v
+#%endif
+#%endif
 
 %files -n python2-%{modname}
 %license LICENSE
