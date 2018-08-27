@@ -108,7 +108,7 @@ Summary: An interpreted, interactive, object-oriented programming language
 Name: %{python}
 # Remember to also rebase python-docs when changing this:
 Version: 2.7.9
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: Python
 Group: Development/Languages
 Requires: %{python}-libs%{?_isa} = %{version}-%{release}
@@ -200,7 +200,7 @@ Source5: pyfuntop.stp
 
 # Supply various useful macros for building python 2 modules:
 #  __python2, python2_sitelib, python2_sitearch, python2_version
-Source6: macros.python2
+# Source6: macros.python2
 
 Source7: pynche
 
@@ -1633,8 +1633,8 @@ sed -i -e "s/'pyconfig.h'/'%{_pyconfig_h}'/" \
   %{buildroot}%{pylibdir}/sysconfig.py
 
 # Install macros for rpm:
-mkdir -p %{buildroot}/%{_rpmconfigdir}/macros.d/
-install -m 644 %{SOURCE6} %{buildroot}/%{_rpmconfigdir}/macros.d/
+#mkdir -p %{buildroot}/%{_rpmconfigdir}/macros.d/
+#install -m 644 %{SOURCE6} %{buildroot}/%{_rpmconfigdir}/macros.d/
 
 # Ensure that the curses module was linked against libncursesw.so, rather than
 # libncurses.so (bug 539917)
@@ -1892,7 +1892,7 @@ rm -fr %{buildroot}
 %endif
 %{_bindir}/python%{pybasever}-config
 %{_libdir}/libpython%{pybasever}.so
-%{_rpmconfigdir}/macros.d/macros.python2
+#%%{_rpmconfigdir}/macros.d/macros.python2
 
 %files tools
 %defattr(-,root,root,755)
