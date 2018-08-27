@@ -4,9 +4,11 @@
 
 %global __provides_exclude_from ^%{_libdir}/%{name}/%{name}/plugins/.*\.so$
 
+%global _python_bytecompile_extra 0
+
 Name:           calibre
-Version:        3.19.0
-Release:        1%{?dist}.1
+Version:        3.28.0
+Release:        3%{?dist}
 Summary:        E-book converter and library manager
 Group:          Applications/Multimedia
 License:        GPLv3
@@ -64,6 +66,7 @@ BuildRequires:  openssl-devel
 # directory (and then installs in the wrong place)
 BuildRequires:  bash-completion
 BuildRequires:  python-apsw
+BuildRequires:  python-enum34
 BuildRequires:  glib2-devel
 BuildRequires:  fontconfig-devel
 BuildRequires:  libinput-devel
@@ -173,14 +176,17 @@ XDG_DATA_DIRS="%{buildroot}%{_datadir}" \
 XDG_UTILS_INSTALL_MODE="system" \
 LIBPATH="%{_libdir}" \
 python setup.py install --root=%{buildroot}%{_prefix} \
-                        --prefix=%{_prefix} \
-                        --libdir=%{_libdir} \
-                        --staging-libdir=%{buildroot}%{_libdir} \
-                        --staging-sharedir=%{buildroot}%{_datadir}
+                            --prefix=%{_prefix} \
+                            --libdir=%{_libdir} \
+                            --staging-libdir=%{buildroot}%{_libdir} \
+                            --staging-sharedir=%{buildroot}%{_datadir}
 
 # remove shebang from init_calibre.py here because
 # it just got spawned by the install script
 sed -i -e '/^#!\//, 1d' %{buildroot}%{python_sitelib}/init_calibre.py
+
+# there are some python files there, do byte-compilation on them
+%py_byte_compile python %{buildroot}%{_datadir}/%{name}
 
 # icons
 mkdir -p %{buildroot}%{_datadir}/pixmaps/
@@ -312,8 +318,60 @@ ln -s %{_jsdir}/mathjax %{_datadir}/%{name}/viewer/
 %{_datadir}/metainfo/*.appdata.xml
 
 %changelog
-* Fri Jun 15 2018 Rex Dieter <rdieter@fedoraproject.org> - 3.19.0-1.1
-- branch rebuild (qt5)
+* Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 3.28.0-3
+- Rebuild with fixed binutils
+
+* Fri Jul 27 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.28.0-2
+- Rebuild for new binutils
+
+* Thu Jul 26 2018 Kevin Fenzi <kevin@scrye.com> - 3.28.0-1
+- Update to 3.28.0. Fixes bug #1605186
+
+* Thu Jul 26 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 3.27.1-5
+- Use versioned python macros
+- Do explicit byte compilation to conform to new guidelines
+
+* Thu Jul 12 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.27.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Wed Jul 11 2018 Sandro Mani <manisandro@gmail.com> - 3.27.1-3
+- Rebuild (podofo)
+
+* Tue Jul 10 2018 Pete Walter <pwalter@fedoraproject.org> - 3.27.1-2
+- Rebuild for ICU 62
+
+* Sat Jul  7 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 3.27.1-1
+- Update to 3.27.1. Fixes bug #1598761
+
+* Thu Jun 21 2018 Rex Dieter <rdieter@fedoraproject.org> - 3.26.1-2
+- rebuild (qt5)
+
+* Fri Jun 15 2018 Kevin Fenzi <kevin@scrye.com> - 3.26.1-1
+- Update to 3.26.1. Fixes bug #1591735
+
+* Sun Jun 03 2018 Kevin Fenzi <kevin@scrye.com> - 3.25.0-1
+- Update to 3.25.0. Fixes bug #1585171
+
+* Wed May 30 2018 Kevin Fenzi <kevin@scrye.com> - 3.24.2-1
+- Update to 3.24.2.
+
+* Tue May 29 2018 Rex Dieter <rdieter@fedoraproject.org> - 3.23.0-2
+- rebuild (qt5)
+
+* Fri May 04 2018 Kevin Fenzi <kevin@scrye.com> - 3.23.0-1
+- Update to 3.23.0. Fixes bug #1574953
+
+* Mon Apr 30 2018 Pete Walter <pwalter@fedoraproject.org> - 3.22.1-2
+- Rebuild for ICU 61.1
+
+* Fri Apr 20 2018 Kevin Fenzi <kevin@scrye.com> - 3.22.1-1
+- Update to 3.22.1. Fixes bug #1569983
+
+* Sat Apr 07 2018 Kevin Fenzi <kevin@scrye.com> - 3.21.0-1
+- Update to 3.21.0. Fixes bug #1564477
+
+* Fri Mar 23 2018 Kevin Fenzi <kevin@scrye.com> - 3.20.0-1
+- Update to 3.20.0. Fixes bug #1559848
 
 * Fri Mar 09 2018 Kevin Fenzi <kevin@scrye.com> - 3.19.0-1
 - Update to 3.19.0. Fixes bug #1553719
