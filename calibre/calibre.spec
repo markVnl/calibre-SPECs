@@ -33,8 +33,8 @@ Patch1:         %{name}-no-update.patch
 #
 Patch3:         calibre-nodisplay.patch
 
-BuildRequires:  python >= 2.7
-BuildRequires:  python-devel >= 2.7
+BuildRequires:  python >= 2.7.9
+BuildRequires:  python-devel >= 2.7.9
 BuildRequires:  python-setuptools
 BuildRequires:  python-qt5-devel
 BuildRequires:  python-qt5
@@ -42,7 +42,7 @@ BuildRequires:  python-qt5-webkit
 BuildRequires:  podofo-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  python-mechanize
-BuildRequires:  python-lxml
+BuildRequires:  python2-lxml
 BuildRequires:  python-dateutil
 BuildRequires:  python-imaging
 BuildRequires:  xdg-utils
@@ -90,7 +90,7 @@ Requires:       qt5-qtsvg
 Requires:       qt5-qtsensors
 Requires:       python-cssutils
 Requires:       python2-odfpy
-Requires:       python-lxml
+Requires:       python2-lxml
 Requires:       python-imaging
 Requires:       python-mechanize
 Requires:       python-dateutil
