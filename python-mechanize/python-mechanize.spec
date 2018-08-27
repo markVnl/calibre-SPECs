@@ -13,6 +13,7 @@ Source0:        https://github.com/python-mechanize/mechanize/archive/v%{version
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
+BuildRequires:  python-setuptools
 # for tests
 #BuildRequires:  python-zope-interface python-twisted-web2
 #BuildRequires:  python-setuptools python2-html5lib
