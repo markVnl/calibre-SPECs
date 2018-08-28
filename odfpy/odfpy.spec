@@ -26,13 +26,12 @@ understanding of data types.
 %package -n python2-%{name}
 Summary:        %{summary}
 
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
+BuildRequires:  python-devel
+BuildRequires:  python-setuptools
 
 Provides:       odfpy = %{version}-%{release}
 Obsoletes:      odfpy < %{version}-%{release}
-
-%{?python_provide:%python_provide python2-%{name}}
+Provides:       python2-%{name} = %{version}-%{release}
 
 %description -n python2-%{name}
 Odfpy aims to be a complete API for OpenDocument in Python. Unlike
@@ -49,30 +48,6 @@ handle all ODF constructions, but could be improved in its
 understanding of data types.
 
 This package provides Python 2 build of %{name}.
-
-%package -n python3-%{name}
-Summary:        %{summary}
-
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-
-%{?python_provide:%python_provide python3-%{name}}
-
-%description -n python3-%{name}
-Odfpy aims to be a complete API for OpenDocument in Python. Unlike
-other more convenient APIs, this one is essentially an abstraction
-layer just above the XML format. The main focus has been to prevent
-the programmer from creating invalid documents. It has checks that
-raise an exception if the programmer adds an invalid element, adds an
-attribute unknown to the grammar, forgets to add a required attribute
-or adds text to an element that doesn't allow it.
-
-These checks and the API itself were generated from the RelaxNG
-schema, and then hand-edited. Therefore the API is complete and can
-handle all ODF constructions, but could be improved in its
-understanding of data types.
-
-This package provides Python 3 build of %{name}.
 
 %package doc
 Summary:        %{summary}
@@ -100,28 +75,19 @@ find -type f -exec sed -i '1s=^#!/usr/bin/\(python\|env python\)[23]\?=#!%{__pyt
 
 %build
 %py2_build
-%py3_build
 
 %install
 %py2_install
 rm %{buildroot}%{_bindir}/*
 
-%py3_install
-
-%check
-make --directory tests
+#%check
+#make --directory tests
 
 %files -n python2-%{name}
 %license GPL-LICENSE-2.txt APACHE-LICENSE-2.0.txt
+%{_mandir}/man1/*
 %{python2_sitelib}/*egg-info
 %{python2_sitelib}/odf
-
-%files -n python3-%{name}
-%license GPL-LICENSE-2.txt APACHE-LICENSE-2.0.txt
-%{_bindir}/*
-%{_mandir}/man1/*
-%{python3_sitelib}/*egg-info
-%{python3_sitelib}/odf
 
 %files doc
 %license GPL-LICENSE-2.txt APACHE-LICENSE-2.0.txt
