@@ -7,8 +7,8 @@
 %global _python_bytecompile_extra 0
 
 Name:           calibre
-Version:        3.28.0
-Release:        3%{?dist}
+Version:        3.29.0
+Release:        1%{?dist}
 Summary:        E-book converter and library manager
 Group:          Applications/Multimedia
 License:        GPLv3
@@ -114,6 +114,7 @@ Requires:       optipng
 Requires:       python2-msgpack
 Requires:       python2-regex
 Requires:       python2-html5-parser
+Requires:       python2-enum34
 
 %description
 Calibre is meant to be a complete e-library solution. It includes library
@@ -318,6 +319,9 @@ ln -s %{_jsdir}/mathjax %{_datadir}/%{name}/viewer/
 %{_datadir}/metainfo/*.appdata.xml
 
 %changelog
+* Tue Aug 14 2018 Kevin Fenzi <kevin@scrye.com> - 3.29.0-1
+- Update to 3.29.0. Fixes bug #1614778
+
 * Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 3.28.0-3
 - Rebuild with fixed binutils
 
